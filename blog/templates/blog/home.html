@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block title %}
+    <title> Django blog {{ title }} </title>
+{% endblock title %}
+{% block content %}
+    {% for post in posts %}
+        <h1> {{ post.title }} </h1>
+        <p>By {{post.author}} on {{ post.date_posted }} </p>
+        <p> {{ post.posted_content }}</p>
+    {% endfor %}
+{% endblock content %}
