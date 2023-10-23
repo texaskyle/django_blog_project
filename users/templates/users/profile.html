@@ -5,5 +5,21 @@
 {% endblock title %}
 
 {% block content %}
-  {{user.username}}
+<div class="container mt-4 text-center">
+    <div class="profile-picture rounded-circle overflow-hidden" style="width: 100px; height: 100px; display: inline-block; vertical-align: middle;">
+        <img src="{{ user.userprofile.profile_picture.url }}" class="w-100 h-100">
+    </div>
+    <div class="d-inline-block align-middle ml-3">
+        <h2>{{ user.username }}</h2>
+        <p class="text-secondary">{{ user.email }}</p>
+    </div>
+</div>
+<div class="container mt-4">
+    <p class="font-italic">{{ user.userprofile.bio }}</p>
+</div>
 {% endblock content %}
+
+
+
+
+
