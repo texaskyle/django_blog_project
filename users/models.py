@@ -12,8 +12,8 @@ class UserProfile(models.Model):
         return f'{self.user.username} profile'
 
     # overriding the save method so that i save am image which have been resized
-    def save(self):
-        super().save()
+    def save(self, *args, **kwargs):
+        super(UserProfile, self).save(*args, **kwargs)
 
         img = Image.open(self.profile_picture.path)
 

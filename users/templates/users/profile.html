@@ -6,8 +6,8 @@
 
 {% block content %}
 <div class="container mt-4 text-center">
-    <div class="profile-picture rounded-circle overflow-hidden" style="width: 100px; height: 100px; display: inline-block; vertical-align: middle;">
-        <img src="{{ user.userprofile.profile_picture.url }}" class="w-100 h-100">
+    <div class="profile-picture rounded-circle overflow-hidden" style="width: 160px; height: 160px; display: inline-block; vertical-align: middle;">
+        <img src="{{ user.userprofile.profile_picture.url }}" class="w-100 h-100 img-fluid">
     </div>
     <div class="d-inline-block align-middle ml-3">
         <h2>{{ user.username }}</h2>

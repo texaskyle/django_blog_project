@@ -1,0 +1,47 @@
+{% extends 'blog/base.html' %}
+{% block title %}
+  <title> Post details </title>
+{% endblock title %}
+
+{% block content %}
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'blog/home.css' %}">
+
+  <div class="container">
+    <article class="all-browsers">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="profile-picture rounded-circle overflow-hidden" style="width: 200px; height: 200px;">
+            <img src="{{ post.author.userprofile.profile_picture.url }}" class="w-100 h-100 img-fluid">
+          </div>
+        </div>
+
+        <div class="col-md-9">
+          <div class="post-details text-muted">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <span class="author-name">{{ post.author }}</span>
+                <small>{{ post.date_posted }}</small>
+              </div>
+            </div>
+          </div>
+
+          <h2 class="text-primary">{{ post.title }}</h2>
+
+          <p class="post-content font-weight-bold bg-light p-3 rounded shadow" style="font-size: 16px; line-height: 1.6;">
+            {{ post.content }}
+          </p>
+
+          {% if object.author == user %}
+            <div class="text-right">
+              <a class="btn btn-sm btn-outline-secondary" href="{% url 'post-update' object.id %}">Edit</a>
+              <a class="btn btn-sm btn-outline-danger" href="{% url 'post-delete' object.id %}">Delete</a>
+            </div>
+          {% endif %}
+        </div>
+      </div>
+      <br>
+    </article>
+  </div>
+{% endblock content %}
+

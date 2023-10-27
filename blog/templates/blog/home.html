@@ -7,27 +7,36 @@
   {% load static %}
   <link rel="stylesheet" href="{% static 'blog/home.css' %}">
 
-<div class="container">
+  <div class="container">
     <article class="all-browsers">
-    {% for post in posts %}
-    <div class="row">
-        <div class="col-md-2">
-            <div class="profile-picture rounded-circle overflow-hidden" style="width: 100px; height: 100px; display: inline-block; vertical-align: middle;">
-                <img src="{{ post.author.userprofile.profile_picture.url }}" class="w-100 h-100">
+      {% for post in posts %}
+        <div class="row mb-4">
+          <div class="col-md-2">
+            <div class="profile-picture rounded-circle overflow-hidden" style="width: 125px; height: 125px;">
+              <img src="{{ post.author.userprofile.profile_picture.url }}" class="w-100 h-100 img-fluid">
             </div>
-        </div>
+          </div>
 
-        <div class="col-md-10">
-            <p class="post-details">
-                <span class="author-name">{{ post.author }}</span> {{ post.date_posted }}
-            </p>
-            <h2> {{ post.title }} </h2>
-            <p class="post-content">{{ post.posted_content }}</p>
+          <div class="col-md-10">
+            <div class="post-details text-muted">
+              <div class="d-flex justify-content-between align-items-center mb-2">
+                <div>
+                  <span class="author-name">{{ post.author }}</span>
+                  <small class="ml-2">{{ post.date_posted }}</small>
+                </div>
+              </div>
+            </div>
+            <h2 class="mb-3">
+              <a href="{% url 'post-detail' post.id %}" class="text-decoration-none text-dark">
+                {{ post.title }}
+              </a>
+            </h2>
+          <p class="post-content font-weight-bold bg-light p-3 rounded shadow" style="font-size: 16px; line-height: 1.6;">
+            {{ post.content }}
+          </p>
+          </div>
         </div>
-    </div>
-    <br>
-    {% endfor %}
+      {% endfor %}
     </article>
-</div>
-
+  </div>
 {% endblock content %}
