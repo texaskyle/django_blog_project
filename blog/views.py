@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.contrib import messages
 from django.urls import reverse_lazy
+from django.contrib.auth.models import User
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.http import HttpResponse
@@ -26,7 +27,18 @@ class PostListView(ListView):
 class PostDetailView(DetailView):
     model = Post
     context_object_name = "post"
+
+
+class UserPostListView(ListView):
+    model = Post
+    context_object_name = 'posts'
+    template_name = 'blog/user_posts.html'
     paginate_by = 2
+
+    # overriding the default queryset to get specific posts of the author
+    def get_queryset(self):
+        user = get_object_or_404(User, username=self.kwargs.get('username'))
+        return Post.objects.filter(author=user).order_by('-date_posted')
 
 
 class PostCreateView(LoginRequiredMixin, CreateView):
